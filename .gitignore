@@ -1,0 +1,20 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IDE
+.idea/
+.vscode/
+.atom/
+
+### JAVA ###
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
