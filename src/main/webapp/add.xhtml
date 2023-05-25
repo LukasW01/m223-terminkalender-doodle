@@ -15,36 +15,52 @@
 >
 
 <h:head>
+   <link rel="stylesheet" href="css/tail.css" />
+   <link rel="stylesheet" href="css/wind.css" />
    <title>Add Reservation - Doodle</title>
 </h:head>
 
 <h:body>
-   <h1>Add Reservation</h1>
-   <h:form>
-      <h:outputLabel for="date" value="Date: " />
-      <h:inputText id="date" value="#{reservationBean.date}" /><br />
+   <h1 class="text-2xl font-bold mb-4">Add Reservation</h1>
 
-      <h:outputLabel for="from" value="From: " />
-      <h:inputText id="from" value="#{reservationBean.from}" /><br />
+   <h:form class="max-w-md">
+      <div class="mb-4">
+         <h:outputLabel for="date" value="Date: " class="block font-bold" />
+         <h:inputText id="date" value="#{reservationBean.date}" class="w-full px-4 py-2 border border-gray-300 rounded" />
+      </div>
 
-      <h:outputLabel for="to" value="To: " />
-      <h:inputText id="to" value="#{reservationBean.to}" /><br />
+      <div class="mb-4">
+         <h:outputLabel for="from" value="From: " class="block font-bold" />
+         <h:inputText id="from" value="#{reservationBean.from}" class="w-full px-4 py-2 border border-gray-300 rounded" />
+      </div>
 
-      <h:outputLabel for="room" value="Room: " />
-      <h:selectOneListbox id="room">
-         <f:selectItems value="#{reservationBean.rooms}" />
-      </h:selectOneListbox><br />
+      <div class="mb-4">
+         <h:outputLabel for="to" value="To: " class="block font-bold" />
+         <h:inputText id="to" value="#{reservationBean.to}" class="w-full px-4 py-2 border border-gray-300 rounded" />
+      </div>
 
-      <h:outputLabel for="comment" value="Comment: " />
-      <h:inputTextarea id="comment" value="#{reservationBean.comment}" /><br />
+      <div class="mb-4">
+         <h:outputLabel for="room" value="Room: " class="block font-bold" />
+         <h:selectOneListbox id="room" class="w-full px-4 py-2 border border-gray-300 rounded">
+            <f:selectItems value="#{reservationBean.rooms}" />
+         </h:selectOneListbox>
+      </div>
 
-      <h:outputLabel for="participants" value="Participants: " />
-      <h:selectManyListbox id="participants" value="#{reservationBean.participants}">
-         <f:selectItems value="#{reservationBean.participants}" />
-      </h:selectManyListbox><br />
+      <div class="mb-4">
+         <h:outputLabel for="comment" value="Comment: " class="block font-bold" />
+         <h:inputTextarea id="comment" value="#{reservationBean.comment}" class="w-full px-4 py-2 border border-gray-300 rounded" />
+      </div>
 
-      <h:commandButton value="Submit" action="#{reservationBean.submit()}" />
+      <div class="mb-4">
+         <h:outputLabel for="participants" value="Participants: " class="block font-bold" />
+         <h:selectManyListbox id="participants" value="#{reservationBean.participants}" class="w-full px-4 py-2 border border-gray-300 rounded">
+            <f:selectItems value="#{reservationBean.participants}" />
+         </h:selectManyListbox>
+      </div>
+
+      <h:commandButton value="Submit" action="#{reservationBean.submit()}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" />
    </h:form>
+
 </h:body>
 
 </html>

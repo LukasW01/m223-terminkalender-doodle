@@ -13,6 +13,8 @@ public class Reservation {
     private ArrayList<Room> rooms;
     private ArrayList<People> participants;
     private String comment;
+    private People people;
+    private Room room;
 
 
     public Reservation(Date date, Date from, Date to, ArrayList<Room> rooms, String comment, ArrayList<People> participants) {
@@ -30,6 +32,11 @@ public class Reservation {
         to = new Date();
         rooms = new ArrayList<>();
         participants = new ArrayList<>();
+
+        rooms.add(new Room("EG 103", "Benedict - Altstetten", 20, 1));
+        rooms.add(new Room("EG 106", "Benedict - Altstetten", 20, 2));
+        rooms.add(new Room("OG 134", "Benedict - Altstetten", 20, 3));
+        rooms.add(new Room("OG 138", "Benedict - Altstetten", 20, 4));
     }
 
     public Date getDate() {
@@ -78,5 +85,9 @@ public class Reservation {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void addRoom(Room room) {
+    	this.rooms.add(room);
     }
 }

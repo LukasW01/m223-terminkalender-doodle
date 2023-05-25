@@ -14,10 +14,6 @@ public class Room {
     }
 
     public Room() {
-        this.name = "EG 103";
-        this.location = "Benedict";
-        this.capacity = 20;
-        this.number = 103;
     }
 
     public String getName() {
@@ -50,5 +46,10 @@ public class Room {
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
