@@ -31,18 +31,18 @@
       <h:form class="max-w-md">
          <div class="mb-4">
             <h:outputLabel for="date" value="Date: " class="block font-bold" />
-            <h:inputText id="date" value="#{reservationBean.info.date}" class="w-full px-4 py-2 border border-gray-300 rounded"/>
+            <h:inputText id="date" value="#{reservationBean.info.dateStr}" class="w-full px-4 py-2 border border-gray-300 rounded"/>
          </div>
 
          <div class="mb-4">
             <h:outputLabel for="from" value="From: " class="block font-bold" />
-            <h:inputText id="from" value="#{reservationBean.info.from}" type="time" class="w-full px-4 py-2 border border-gray-300 rounded" />
+            <h:inputText id="from" value="#{reservationBean.info.fromStr}" type="time" class="w-full px-4 py-2 border border-gray-300 rounded" />
          </div>
 
 
          <div class="mb-4">
             <h:outputLabel for="to" value="To: " class="block font-bold" />
-            <h:inputText id="to" value="#{reservationBean.info.to}" type="time" class="w-full px-4 py-2 border border-gray-300 rounded" />
+            <h:inputText id="to" value="#{reservationBean.info.toStr}" type="time" class="w-full px-4 py-2 border border-gray-300 rounded" />
          </div>
 
          <div class="mb-4">

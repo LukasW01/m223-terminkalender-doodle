@@ -1,12 +1,17 @@
 package dev.bene.doodle.model;
 
+import org.bson.Document;
+
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Info {
     private Date date;
+    private String dateStr;
     private Date from;
+    private String fromStr;
     private Date to;
+    private String toStr;
     private ArrayList<Room> rooms;
     private ArrayList<People> participants;
     private String comment;
@@ -23,8 +28,12 @@ public class Info {
 
     public Info() {
         date = new Date();
+        dateStr = date.toString();
         from = new Date();
+        fromStr = from.toString();
         to = new Date();
+        toStr = to.toString();
+
         rooms = new ArrayList<>();
         participants = new ArrayList<>();
         People people = new People();
@@ -102,5 +111,58 @@ public class Info {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getDateStr() {
+        return dateStr;
+    }
+
+    public void setDateStr(String dateStr) {
+        this.dateStr = dateStr;
+    }
+
+    public String getFromStr() {
+        return fromStr;
+    }
+
+    public void setFromStr(String fromStr) {
+        this.fromStr = fromStr;
+    }
+
+    public String getToStr() {
+        return toStr;
+    }
+
+    public void setToStr(String toStr) {
+        this.toStr = toStr;
+    }
+
+    @Override
+    public String toString() {
+        return "Info{" +
+                "date=" + date +
+                ", dateStr='" + dateStr + '\'' +
+                ", from=" + from +
+                ", fromStr='" + fromStr + '\'' +
+                ", to=" + to +
+                ", toStr='" + toStr + '\'' +
+                ", rooms=" + rooms +
+                ", participants=" + participants +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
+
+    public Document toBson() {
+        Document doc = new Document();
+        doc.append("date", date);
+        doc.append("dateStr", dateStr);
+        doc.append("from", from);
+        doc.append("fromStr", fromStr);
+        doc.append("to", to);
+        doc.append("toStr", toStr);
+        doc.append("rooms", rooms);
+        doc.append("participants", participants);
+        doc.append("comment", comment);
+        return doc;
     }
 }

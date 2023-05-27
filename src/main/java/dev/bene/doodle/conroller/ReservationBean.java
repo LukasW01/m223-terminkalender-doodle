@@ -5,14 +5,14 @@ import dev.bene.doodle.MongoDB;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.convert.Converter;
+import javax.faces.view.ViewScoped;
 
 @ManagedBean
 @SessionScoped
 public class ReservationBean {
 
     private Info info;
-    private MongoDB mongoDB;
+    private final MongoDB mongoDB;
 
     public ReservationBean() {
         info = new Info();
@@ -28,7 +28,7 @@ public class ReservationBean {
     }
 
     public String submit() {
-        mongoDB.setCollection(info);
+        mongoDB.setCollection(info.toBson());
         return "index.xhtml?faces-redirect=true";
     }
 }

@@ -17,6 +17,7 @@ public class MongoDB {
         try {
             mongoClient = MongoClients.create("mongodb://localhost:27017");
             database = mongoClient.getDatabase("doodle");
+            System.out.println("Connected to database");
         } catch (Exception e) {
             System.out.println("Error connecting to database: " + e);
         }
@@ -27,13 +28,13 @@ public class MongoDB {
         return database.getCollection("doodle");
     }
 
-    public com.mongodb.client.FindIterable<Document> getCollection(String collectionName, String param) {
+    public com.mongodb.client.FindIterable<Document> getCollection(String param) {
         return database.getCollection("doodle")
                 .find(new Document("name", param));
 
     }
 
-    public void setCollection(Object param) {
+    public void setCollection(Document param) {
         database.getCollection("doodle").insertOne((Document) param);
     }
 
