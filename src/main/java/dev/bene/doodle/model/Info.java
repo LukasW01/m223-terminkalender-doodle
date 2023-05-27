@@ -4,15 +4,16 @@ import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Info {
+    private Integer id;
     private String date;
     private String from;
     private String to;
     private ArrayList<Room> rooms;
     private ArrayList<People> participants;
     private String comment;
-
 
     public Info(String date, String from, String to, ArrayList<Room> rooms, String comment, ArrayList<People> participants) {
         this.date = date;
@@ -24,9 +25,12 @@ public class Info {
     }
 
     public Info() {
-        date = new Date().toString();
-        from = new Date().toString();
-        to = new Date().toString();
+        SimpleDateFormat dateFormatHHMM = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat dateFormatYYYYMMDD = new SimpleDateFormat("yyyy-MM-dd");
+
+        date = dateFormatYYYYMMDD.format(new Date());
+        from = dateFormatHHMM.format(new Date());
+        to = dateFormatHHMM.format(new Date(new Date().getTime() + 180 * 60 * 1000));
 
         rooms = new ArrayList<>();
         participants = new ArrayList<>();
@@ -45,6 +49,13 @@ public class Info {
         }
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public String getDate() {
         return date;
     }

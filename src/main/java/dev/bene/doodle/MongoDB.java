@@ -1,5 +1,6 @@
 package dev.bene.doodle;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
@@ -24,19 +25,29 @@ public class MongoDB {
         return database;
     }
 
-    public com.mongodb.client.MongoCollection<org.bson.Document> getCollection() {
-        return database.getCollection("doodle");
-    }
-
-    public com.mongodb.client.FindIterable<Document> getCollection(String param) {
+    public FindIterable<Document> getCollection() {
         return database.getCollection("doodle")
-                .find(new Document("name", param));
+                .find(new Document("id_task", new Document("$exists", true)))
+                .sort(new Document("id_task", 1));
 
     }
 
     public void setCollection(Document param) {
         System.out.println("Inserting: " + param);
         database.getCollection("doodle").insertOne((Document) param);
+    }
+
+    public void updateCollection(Document param, Integer id) {
+        System.out.println("Updating: " + param);
+        database.getCollection("doodle").updateOne(new Document("_id", id), new Document("$set", param));
+    }
+
+    public void removeCollection(Document param, Integer id) {
+        System.out.println("Removing: " + param);
+        database.getCollection("doodle").deleteOne(new Document("id_task", id));
+    }
+    public Document getDocument(Document param, Integer id) {
+        return database.getCollection("doodle").find(new Document("id_task", id)).first();
     }
 
     public void close() {

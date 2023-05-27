@@ -31,4 +31,31 @@ public class ReservationBean {
         mongoDB.setCollection(info.toBson());
         return "index.xhtml?faces-redirect=true";
     }
+
+    public String delete(Integer id) {
+        mongoDB.removeCollection(info.toBson(), id);
+        return "index.xhtml?faces-redirect=true&delete=true";
+    }
+
+    public String update(Integer id) {
+        mongoDB.updateCollection(info.toBson(), id);
+        return "view.xhtml?faces-redirect=true&edit=true";
+    }
+
+    public String redirToEdit() {
+        return "view.xhtml?faces-redirect=true&edit=true";
+    }
+
+    public String redirToIndex() {
+        return "index.xhtml?faces-redirect=true";
+    }
+
+    public String redirToView() {
+        return "view.xhtml?faces-redirect=true";
+    }
+
+    public String redirToAdd() {
+        return "add.xhtml?faces-redirect=true";
+    }
+
 }
