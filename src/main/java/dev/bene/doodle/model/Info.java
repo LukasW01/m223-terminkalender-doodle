@@ -160,8 +160,8 @@ public class Info {
         doc.append("fromStr", fromStr);
         doc.append("to", to);
         doc.append("toStr", toStr);
-        doc.append("rooms", rooms);
-        doc.append("participants", participants);
+        doc.append("rooms", rooms.toString());
+        doc.append("participants", participants.toString());
         doc.append("comment", comment);
         return doc;
     }
