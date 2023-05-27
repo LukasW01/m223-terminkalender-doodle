@@ -6,18 +6,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Info {
-    private Date date;
-    private String dateStr;
-    private Date from;
-    private String fromStr;
-    private Date to;
-    private String toStr;
+    private String date;
+    private String from;
+    private String to;
     private ArrayList<Room> rooms;
     private ArrayList<People> participants;
     private String comment;
 
 
-    public Info(Date date, Date from, Date to, ArrayList<Room> rooms, String comment, ArrayList<People> participants) {
+    public Info(String date, String from, String to, ArrayList<Room> rooms, String comment, ArrayList<People> participants) {
         this.date = date;
         this.from = from;
         this.to = to;
@@ -27,61 +24,48 @@ public class Info {
     }
 
     public Info() {
-        date = new Date();
-        dateStr = date.toString();
-        from = new Date();
-        fromStr = from.toString();
-        to = new Date();
-        toStr = to.toString();
+        date = new Date().toString();
+        from = new Date().toString();
+        to = new Date().toString();
 
         rooms = new ArrayList<>();
         participants = new ArrayList<>();
-        People people = new People();
-        Room room = new Room();
 
-        rooms.add(new Room("EG 103"));
-        rooms.add(new Room("EG 106"));
-        rooms.add(new Room("OG 134"));
-        rooms.add(new Room("OG 138"));
+        String[] roomNames = {"EG 103", "EG 106", "OG 134", "OG 138"};
+        for (String roomName : roomNames) {
+            rooms.add(new Room(roomName));
+        }
 
-        participants.add(new People("Lukas"));
-        participants.add(new People("Elin"));
-        participants.add(new People("Jessica"));
-        participants.add(new People("Annabel"));
-        participants.add(new People("Ale"));
-        participants.add(new People("Ada"));
-        participants.add(new People("Ari"));
-        participants.add(new People("Aya"));
-        participants.add(new People("Aywin"));
-        participants.add(new People("Emilio"));
-        participants.add(new People("Aleks"));
-        participants.add(new People("Kieran"));
-        participants.add(new People("Maor"));
-        participants.add(new People("Martin"));
-        participants.add(new People("Nikola"));
-        participants.add(new People("Nils"));
-        participants.add(new People("Ryan"));
-        participants.add(new People("Shay"));
-        participants.add(new People("Usman"));
+        String[] participantNames = {
+                "Lukas", "Elin", "Jessica", "Annabel", "Ale", "Ada", "Ari", "Aya", "Aywin",
+                "Emilio", "Aleks", "Kieran", "Maor", "Martin", "Nikola", "Nils", "Ryan", "Shay", "Usman"
+        };
+        for (String participantName : participantNames) {
+            participants.add(new People(participantName));
+        }
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public Date getFrom() {
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getFrom() {
         return from;
     }
 
-    public void setFrom(Date from) {
+    public void setFrom(String from) {
         this.from = from;
     }
 
-    public Date getTo() {
+    public String getTo() {
         return to;
     }
 
-    public void setTo(Date to) {
+    public void setTo(String to) {
         this.to = to;
     }
 
@@ -109,57 +93,16 @@ public class Info {
         this.comment = comment;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getDateStr() {
-        return dateStr;
-    }
-
-    public void setDateStr(String dateStr) {
-        this.dateStr = dateStr;
-    }
-
-    public String getFromStr() {
-        return fromStr;
-    }
-
-    public void setFromStr(String fromStr) {
-        this.fromStr = fromStr;
-    }
-
-    public String getToStr() {
-        return toStr;
-    }
-
-    public void setToStr(String toStr) {
-        this.toStr = toStr;
-    }
-
     @Override
-    public String toString() {
-        return "Info{" +
-                "date=" + date +
-                ", dateStr='" + dateStr + '\'' +
-                ", from=" + from +
-                ", fromStr='" + fromStr + '\'' +
-                ", to=" + to +
-                ", toStr='" + toStr + '\'' +
-                ", rooms=" + rooms +
-                ", participants=" + participants +
-                ", comment='" + comment + '\'' +
-                '}';
+    public String toString(){
+        return date + " " + from + " " + to + " " + rooms.toString() + " " + participants.toString() + " " + comment;
     }
 
     public Document toBson() {
         Document doc = new Document();
         doc.append("date", date);
-        doc.append("dateStr", dateStr);
         doc.append("from", from);
-        doc.append("fromStr", fromStr);
         doc.append("to", to);
-        doc.append("toStr", toStr);
         doc.append("rooms", rooms.toString());
         doc.append("participants", participants.toString());
         doc.append("comment", comment);

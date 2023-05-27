@@ -35,6 +35,7 @@ public class MongoDB {
     }
 
     public void setCollection(Document param) {
+        System.out.println("Inserting: " + param);
         database.getCollection("doodle").insertOne((Document) param);
     }
 

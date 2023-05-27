@@ -5,10 +5,10 @@ import dev.bene.doodle.MongoDB;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class ReservationBean {
 
     private Info info;
