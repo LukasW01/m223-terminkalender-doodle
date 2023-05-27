@@ -3,21 +3,16 @@ package dev.bene.doodle.model;
 import java.util.ArrayList;
 import java.util.Date;
 
-import dev.bene.doodle.model.People;
-import dev.bene.doodle.model.Room;
-
-public class Reservation {
+public class Info {
     private Date date;
     private Date from;
     private Date to;
     private ArrayList<Room> rooms;
     private ArrayList<People> participants;
     private String comment;
-    private People people;
-    private Room room;
 
 
-    public Reservation(Date date, Date from, Date to, ArrayList<Room> rooms, String comment, ArrayList<People> participants) {
+    public Info(Date date, Date from, Date to, ArrayList<Room> rooms, String comment, ArrayList<People> participants) {
         this.date = date;
         this.from = from;
         this.to = to;
@@ -26,17 +21,39 @@ public class Reservation {
         this.comment = comment;
     }
 
-    public Reservation() {
+    public Info() {
         date = new Date();
         from = new Date();
         to = new Date();
         rooms = new ArrayList<>();
         participants = new ArrayList<>();
+        People people = new People();
+        Room room = new Room();
 
-        rooms.add(new Room("EG 103", "Benedict - Altstetten", 20, 1));
-        rooms.add(new Room("EG 106", "Benedict - Altstetten", 20, 2));
-        rooms.add(new Room("OG 134", "Benedict - Altstetten", 20, 3));
-        rooms.add(new Room("OG 138", "Benedict - Altstetten", 20, 4));
+        rooms.add(new Room("EG 103"));
+        rooms.add(new Room("EG 106"));
+        rooms.add(new Room("OG 134"));
+        rooms.add(new Room("OG 138"));
+
+        participants.add(new People("Lukas"));
+        participants.add(new People("Elin"));
+        participants.add(new People("Jessica"));
+        participants.add(new People("Annabel"));
+        participants.add(new People("Ale"));
+        participants.add(new People("Ada"));
+        participants.add(new People("Ari"));
+        participants.add(new People("Aya"));
+        participants.add(new People("Aywin"));
+        participants.add(new People("Emilio"));
+        participants.add(new People("Aleks"));
+        participants.add(new People("Kieran"));
+        participants.add(new People("Maor"));
+        participants.add(new People("Martin"));
+        participants.add(new People("Nikola"));
+        participants.add(new People("Nils"));
+        participants.add(new People("Ryan"));
+        participants.add(new People("Shay"));
+        participants.add(new People("Usman"));
     }
 
     public Date getDate() {
@@ -85,9 +102,5 @@ public class Reservation {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public void addRoom(Room room) {
-    	this.rooms.add(room);
     }
 }
