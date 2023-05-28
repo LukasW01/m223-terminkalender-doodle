@@ -9,17 +9,18 @@
 .svn/
 migrate_working_dir/
 
-# IDE
+### IDE ###
 .idea/
 .vscode/
 .atom/
 
-### JAVA ###
+### Java/Maven ###
 target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### MAVEN ###
-
 ### NPM ###
 node_modules/
+
+# Tailwind
+src/main/webapp/css/tailwind.css

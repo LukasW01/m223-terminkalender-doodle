@@ -2,7 +2,7 @@
 	"name": "Doodle",
 	"version": "1.0.0",
 	"scripts": {
-		"build:tailwind": "pnpx tailwindcss build src/main/webapp/css/tail.css -o src/main/webapp/css/wind.css"
+		"build:tailwind": "pnpx tailwindcss build src/main/webapp/css/tail-wind.css -o src/main/webapp/css/tailwind.css"
 	},
 	"dependencies": {
 		"copy-webpack-plugin": "^11.0.0",
