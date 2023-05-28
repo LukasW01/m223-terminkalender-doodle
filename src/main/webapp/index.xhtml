@@ -41,38 +41,38 @@
             </tr>
             </thead>
             <tbody>
-            <ui:fragment rendered="#{empty reservationBean.get()}">
-                <tr>
-                    <td colspan="7" class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-white">No reservations found.</div>
-                    </td>
-                </tr>
-            </ui:fragment>
-            <ui:repeat value="#{reservationBean.get()}" var="reservation">
-                <tr class="bg-gray-800">
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-white">#{reservation.id}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-white">#{reservation.date}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-white">#{reservation.from}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-white">#{reservation.to}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-white">#{fn:substring(reservation.rooms, 1, fn:length(reservation.rooms) - 1)}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-white">#{fn:substring(reservation.participants, 1, fn:length(reservation.participants) - 1)}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-white">#{reservation.comment}</div>
-                    </td>
-                </tr>
-            </ui:repeat>
+                <ui:fragment rendered="#{null != reservationBean.get()}">
+                    <tr class="bg-gray-800">
+                        <td class="px-6 py-4 whitespace-nowrap" colspan="7">
+                            <div class="text-sm text-white">No reservations found</div>
+                        </td>
+                    </tr>
+                </ui:fragment>
+                <ui:repeat value="#{reservationBean.get()}" var="reservation">
+                    <tr class="bg-gray-800">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-white">#{reservation.id}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-white">#{reservation.date}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-white">#{reservation.from}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-white">#{reservation.to}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-white">#{fn:substring(reservation.rooms, 1, fn:length(reservation.rooms) - 1)}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-white">#{fn:substring(reservation.participants, 1, fn:length(reservation.participants) - 1)}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-white">#{reservation.comment}</div>
+                        </td>
+                    </tr>
+                </ui:repeat>
             </tbody>
         </table>
     </div>
