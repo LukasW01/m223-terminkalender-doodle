@@ -8,17 +8,74 @@
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+>
 <h:head>
     <title>Doodle</title>
     <link rel="stylesheet" href="css/tail.css" />
     <link rel="stylesheet" href="css/wind.css" />
 </h:head>
 
-<h:body class="bg-slate-600">
-        <p class="text-white">HI :)</p>
+<h:body class="bg-gray-900">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <caption class="p-5 text-lg font-semibold text-left bg-gray-800 text-white">
+                <div class="flex justify-between items-center">
+                    <span class="text-3xl">Room reservations</span>
+                    <h:link outcome="add" class="my-4 shrink-0 h-12 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500 hover:bg-blue-700 hover:text-white w-52 items-end" style="width: 215px;">Add reservation</h:link>
+                </div>
+            </caption>
+            <thead class="text-xs uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">ID:</th>
+                <th scope="col" class="px-6 py-3">Date:</th>
+                <th scope="col" class="px-6 py-3">From:</th>
+                <th scope="col" class="px-6 py-3">To:</th>
+                <th scope="col" class="px-6 py-3">Room:</th>
+                <th scope="col" class="px-6 py-3">Participant:</th>
+                <th scope="col" class="px-6 py-3">Comment:</th>
+            </tr>
+            </thead>
+            <tbody>
+            <ui:fragment rendered="#{empty reservationBean.get()}">
+                <tr>
+                    <td colspan="7" class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-white">No reservations found.</div>
+                    </td>
+                </tr>
+            </ui:fragment>
+            <ui:repeat value="#{reservationBean.get()}" var="reservation">
+                <tr class="bg-gray-800">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-white">#{reservation.id}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-white">#{reservation.date}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-white">#{reservation.from}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-white">#{reservation.to}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-white">#{fn:substring(reservation.rooms, 1, fn:length(reservation.rooms) - 1)}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-white">#{fn:substring(reservation.participants, 1, fn:length(reservation.participants) - 1)}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-white">#{reservation.comment}</div>
+                    </td>
+                </tr>
+            </ui:repeat>
+            </tbody>
+        </table>
+    </div>
 </h:body>
 
 </html>

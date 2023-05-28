@@ -1,10 +1,11 @@
 package dev.bene.doodle.conroller;
 
+import com.mongodb.client.FindIterable;
 import dev.bene.doodle.model.Info;
 import dev.bene.doodle.MongoDB;
+import org.bson.Document;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 @ManagedBean
@@ -42,20 +43,7 @@ public class ReservationBean {
         return "view.xhtml?faces-redirect=true&edit=true";
     }
 
-    public String redirToEdit() {
-        return "view.xhtml?faces-redirect=true&edit=true";
+    public FindIterable<Document> get() {
+        return mongoDB.getCollection();
     }
-
-    public String redirToIndex() {
-        return "index.xhtml?faces-redirect=true";
-    }
-
-    public String redirToView() {
-        return "view.xhtml?faces-redirect=true";
-    }
-
-    public String redirToAdd() {
-        return "add.xhtml?faces-redirect=true";
-    }
-
 }

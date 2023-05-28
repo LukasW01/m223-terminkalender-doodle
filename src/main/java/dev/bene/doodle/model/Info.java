@@ -47,6 +47,8 @@ public class Info {
         for (String participantName : participantNames) {
             participants.add(new People(participantName));
         }
+
+        id = (int) (Math.random() * 1000000);
     }
 
     public Integer getId() {
@@ -111,6 +113,7 @@ public class Info {
 
     public Document toBson() {
         Document doc = new Document();
+        doc.append("id", id);
         doc.append("date", date);
         doc.append("from", from);
         doc.append("to", to);

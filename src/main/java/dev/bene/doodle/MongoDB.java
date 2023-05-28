@@ -26,10 +26,7 @@ public class MongoDB {
     }
 
     public FindIterable<Document> getCollection() {
-        return database.getCollection("doodle")
-                .find(new Document("id_task", new Document("$exists", true)))
-                .sort(new Document("id_task", 1));
-
+        return database.getCollection("doodle").find();
     }
 
     public void setCollection(Document param) {
