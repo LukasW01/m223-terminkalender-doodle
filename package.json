@@ -4,22 +4,8 @@
 	"scripts": {
 		"build:tailwind": "pnpx tailwindcss build src/main/webapp/css/tail-wind.css -o src/main/webapp/css/tailwind.css"
 	},
-	"dependencies": {
-		"copy-webpack-plugin": "^11.0.0",
-		"html-webpack-plugin": "^5.5.1",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"react-scripts": "^5.0.1",
-		"style-loader": "^3.3.2",
-		"ts-loader": "^9.4.2",
-		"webpack": "^5.81.0",
-		"webpack-cli": "^5.0.2"
-	},
 	"devDependencies": {
 		"@types/node": "^20.2.4",
-		"@types/webpack": "^5.28.1",
-		"@types/webpack-dev-server": "^4.7.2",
-		"css-loader": "^6.7.3",
 		"tailwindcss": "^3.3.2",
 		"ts-node": "^10.9.1",
 		"typescript": "^5.0.4"
