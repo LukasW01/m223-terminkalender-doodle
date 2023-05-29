@@ -140,7 +140,7 @@ public class Info {
         doc.append("date", date);
         doc.append("from", from);
         doc.append("to", to);
-        doc.append("room", room.toString());
+        doc.append("room", room != null ? room.toString() : "");
         doc.append("participants", participants.toString());
         doc.append("comment", comment);
         return doc;

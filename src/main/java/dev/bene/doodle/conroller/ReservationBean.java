@@ -8,6 +8,7 @@ import org.bson.Document;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,12 +58,12 @@ public class ReservationBean {
 
     public String delete(String id) {
         mongoDB.removeCollection(id);
-        return "index.xhtml";
+        return "index.xhtml?faces-redirect=true";
     }
 
     public String update(String id) {
         mongoDB.updateCollection(info.toBson(), id);
-        return "edit.xhtml";
+        return "edit.xhtml?faces-redirect=true";
     }
 
     public List<Room> getAllRooms() {
@@ -73,5 +74,11 @@ public class ReservationBean {
             rooms.add(new Room(roomNameString));
         }
         return rooms;
+    }
+
+    public String edit(String id) {
+        Document doc = mongoDB.getReservationByPrivateID(id);
+        info.fromBSON(doc);
+        return "edit.xhtml?faces-redirect=true";
     }
 }

@@ -64,9 +64,9 @@
                             </h:link>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <h:link value="Edit reservation" outcome="edit.xhtml" class="active:text-blue-500 w-52 items-end text-blue-600" style="width: 215px;">
-                                <f:param name="id" value="#{reservation.id_private != null ? reservation.id_private : ''}" />
-                            </h:link>
+                            <h:form>
+                                <h:commandLink value="Edit reservation" action="#{reservationBean.edit(reservation.id_private)}" class="active:text-blue-500 w-52 items-end text-blue-600" style="width: 215px;"/>
+                            </h:form>
                         </td>
                     </tr>
                 </ui:repeat>

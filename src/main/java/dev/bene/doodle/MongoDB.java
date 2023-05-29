@@ -64,8 +64,8 @@ public class MongoDB {
     }
 
 
-    public void updateCollection(Document param, String id) {
-        collection.updateOne(eq("id_private", id), new Document("$set", param));
+    public void updateCollection(Document params, String id) {
+        collection.replaceOne(eq("id_private", id), params);
     }
 
     public void removeCollection(String id) {

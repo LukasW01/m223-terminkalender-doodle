@@ -15,21 +15,21 @@
     <title>Edit Reservation - Doodle</title>
 </h:head>
 <h:body class="bg-gray-900">
-    <h:form class="max-w-xl">
-            <c:set var="reservation" value="#{reservationBean.getCollectionByPrivateID(param['id'])}"/>
+        <h:form class="max-w-xl">
+
             <h:link outcome="index" class="block text-blue-600">← Back</h:link>
             <h1 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">Edit Reservation</h1>
             <div class="col-span-6 sm:col-span-4 my-1 mt-4">
                 <h:outputLabel for="date" value="Date:" class="block text-gray-300 text-sm font-bold mb-2" />
-                <h:inputText value="#{reservation.date}" id="date" class="block text-gray-300 text-sm font-bold mb-2" aria-placeholder="date"  />
+                <h:inputText value="#{reservationBean.info.date}" id="date" class="block text-gray-300 text-sm font-bold mb-2" aria-placeholder="date"  />
             </div>
             <div class="col-span-6 sm:col-span-4 my-1">
                 <h:outputLabel for="from" value="From:" class="block text-gray-300 text-sm font-bold mb-2" />
-                <h:inputText value="#{reservation.from}" id="from" class="block text-gray-300 text-sm font-bold mb-2" aria-placeholder="from"/>
+                <h:inputText value="#{reservationBean.info.from}" id="from" class="block text-gray-300 text-sm font-bold mb-2" aria-placeholder="from"/>
             </div>
             <div class="col-span-6 sm:col-span-4 my-1">
                 <h:outputLabel for="to" value="To:" class="block text-gray-300 text-sm font-bold mb-2" />
-                <h:inputText value="#{reservation.to}" id="to" class="block text-gray-300 text-sm font-bold mb-2" aria-placeholder="to" />
+                <h:inputText value="#{reservationBean.info.to}" id="to" class="block text-gray-300 text-sm font-bold mb-2" aria-placeholder="to" />
             </div>
             <div class="col-span-6 sm:col-span-4 my-1">
                 <h:outputLabel for="room" value="Room:" class="block text-gray-300 text-sm font-bold mb-2" />
@@ -45,10 +45,14 @@
             </div>
             <div class="col-span-6 sm:col-span-4 my-1 my-2">
                 <h:outputLabel for="comment" value="Comment:" class="block text-gray-300 text-sm font-bold mb-2" />
-                <h:inputTextarea value="#{reservation.comment}" id="comment" class="block text-gray-300 text-sm font-bold mb-2"  aria-placeholder="comment"/>
+                <h:inputTextarea value="#{reservationBean.info.comment}" id="comment" class="block text-gray-300 text-sm font-bold mb-2"  aria-placeholder="comment"/>
             </div>
-            <h:commandButton value="Update" id="update" action="#{reservationBean.update(param['id'])}" class="my-4 inline-block shrink-0 h-12 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500 hover:bg-blue-700 hover:text-white w-1/2" />
-            <h:commandButton value="Delete" id="delte" action="#{reservationBean.delete(param['id'])}" class="my-4 inline-block shrink-0 h-12 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500 hover:bg-blue-700 hover:text-white w-1/2" />
-    </h:form>
+            <h:commandButton value="Update" id="update" action="#{reservationBean.update(reservationBean.info.id_private)}" class="my-4 inline-block shrink-0 h-12 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500 hover:bg-blue-700 hover:text-white w-1/2">
+                <f:param name="id" value="#{reservationBean.info.id_private}" />
+            </h:commandButton>
+            <h:commandButton value="Delete" id="delete" action="#{reservationBean.delete(reservationBean.info.id_private)}" class="my-4 inline-block shrink-0 h-12 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500 hover:bg-blue-700 hover:text-white w-1/2">
+                <f:param name="id" value="#{reservationBean.info.id_private}" />
+            </h:commandButton>
+        </h:form>
 </h:body>
 </html>
