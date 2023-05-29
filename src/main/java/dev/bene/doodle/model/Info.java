@@ -4,10 +4,13 @@ import dev.bene.doodle.MongoDB;
 
 import com.mongodb.client.FindIterable;
 import org.bson.Document;
-import java.util.ArrayList;
-import java.util.Date;
+
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
 import java.text.SimpleDateFormat;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class Info {
     private String id_public;
@@ -15,8 +18,8 @@ public class Info {
     private String date;
     private String from;
     private String to;
-    private ArrayList<Room> rooms;
-    private ArrayList<People> participants;
+    private Room room;
+    private List<People> participants;
     private String comment;
     private final MongoDB mongoDB;
     private final SimpleDateFormat dateFormatHHMM = new SimpleDateFormat("HH:mm");
@@ -24,7 +27,6 @@ public class Info {
 
     public Info() {
         mongoDB = new MongoDB();
-        rooms = new ArrayList<>();
         participants = new ArrayList<>();
 
         placeholders();
@@ -35,11 +37,7 @@ public class Info {
         from = dateFormatHHMM.format(new Date());
         to = dateFormatHHMM.format(new Date(new Date().getTime() + 180 * 60 * 1000));
 
-        FindIterable<Document> roomNames = mongoDB.getCollectionRooms();
-        for (Document roomName : roomNames) {
-            String roomNameString = roomName.getString("roomName");
-            rooms.add(new Room(roomNameString));
-        }
+
 
         FindIterable<Document> participantNames = mongoDB.getCollectionParticipant();
         for (Document participantName : participantNames) {
@@ -49,8 +47,14 @@ public class Info {
 
         comment = "-";
 
-        id_public = UUID.randomUUID().toString();
-        id_private = UUID.randomUUID().toString();
+        try {
+            KeyPair keyPair = KeyPairGenerator.getInstance("RSA").generateKeyPair();
+            Base64.Encoder enc = Base64.getEncoder();
+            id_private = new String(enc.encode(keyPair.getPrivate().getEncoded()));
+            id_public = new String(enc.encode(keyPair.getPublic().getEncoded()));
+        } catch (NoSuchAlgorithmException e) {
+            System.err.println("RSA is not a know generator");
+        }
     }
 
     public String getId_public() {
@@ -93,16 +97,19 @@ public class Info {
         this.to = to;
     }
 
-    public ArrayList<Room> getRooms() {
-        return rooms;
-    }
 
-    public void setRooms(ArrayList<Room> rooms) {
-        this.rooms = rooms;
-    }
 
-    public ArrayList<People> getParticipants() {
+
+
+
+
+
+    public List<People> getParticipants() {
         return participants;
+    }
+
+    public void setParticipants(List<People> participants) {
+        this.participants = participants;
     }
 
     public void setParticipants(ArrayList<People> participants) {
@@ -117,6 +124,14 @@ public class Info {
         this.comment = comment;
     }
 
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
     public Document toBson() {
         Document doc = new Document();
         doc.append("reservation", true);
@@ -125,9 +140,22 @@ public class Info {
         doc.append("date", date);
         doc.append("from", from);
         doc.append("to", to);
-        doc.append("rooms", rooms.toString());
+        doc.append("room", room.toString());
         doc.append("participants", participants.toString());
         doc.append("comment", comment);
         return doc;
+    }
+
+
+
+    public void fromBSON(Document doc) {
+        id_public = doc.getString("id_public");
+        id_private = doc.getString("id_private");
+        date = doc.getString("date");
+        from = doc.getString("from");
+        to = doc.getString("to");
+        room = new Room(doc.getString("room"));
+        participants = Arrays.stream(doc.getString("participants").split(",")).map(People::new).collect(Collectors.toList());
+        comment = doc.getString("comment");
     }
 }

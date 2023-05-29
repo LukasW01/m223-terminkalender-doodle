@@ -33,6 +33,7 @@
                 <th scope="col" class="px-6 py-3">Participant:</th>
                 <th scope="col" class="px-6 py-3">Comment:</th>
                 <th scope="col" class="px-6 py-3">View:</th>
+                <th scope="col" class="px-6 py-3">Edit:</th>
             </tr>
             </thead>
             <tbody>
@@ -49,7 +50,7 @@
                             <div class="text-sm text-white">#{reservation.to != null ? reservation.to : 'No to definied'}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-white">#{reservation.rooms != null ? fn:substring(reservation.rooms, 1, fn:length(reservation.rooms) - 1) : 'No rooms definied'}</div>
+                            <div class="text-sm text-white">#{reservation.room != null ? reservation.room : 'No rooms definied'}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="text-sm text-white">#{reservation.participants != null ? fn:substring(reservation.participants, 1, fn:length(reservation.participants) - 1) : 'No participants definied'}</div>
@@ -60,6 +61,11 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             <h:link value="View reservation" outcome="view.xhtml" class="active:text-blue-500 w-52 items-end text-blue-600" style="width: 215px;">
                                 <f:param name="id" value="#{reservation.id_public != null ? reservation.id_public : ''}" />
+                            </h:link>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <h:link value="Edit reservation" outcome="edit.xhtml" class="active:text-blue-500 w-52 items-end text-blue-600" style="width: 215px;">
+                                <f:param name="id" value="#{reservation.id_private != null ? reservation.id_private : ''}" />
                             </h:link>
                         </td>
                     </tr>

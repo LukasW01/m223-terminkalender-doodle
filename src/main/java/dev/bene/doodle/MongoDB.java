@@ -5,10 +5,9 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.IndexOptions;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.Indexes;
 import com.mongodb.MongoWriteException;
+import static com.mongodb.client.model.Filters.eq;
 import org.bson.Document;
 
 public class MongoDB {
@@ -44,8 +43,12 @@ public class MongoDB {
         return collection.find(new Document("participant", true));
     }
 
-    public FindIterable<Document> getReservationByPublicID(String id) {
-        return collection.find(new Document("id_public", id));
+    public Document getReservationByPublicID(String id) {
+        return collection.find(eq("id_public", id)).first();
+    }
+
+    public Document getReservationByPrivateID(String id) {
+        return collection.find(eq("id_private", id)).first();
     }
 
     public void setCollection(Document param) {
@@ -61,12 +64,12 @@ public class MongoDB {
     }
 
 
-    public void updateCollection(Document param, Integer id) {
-        collection.updateOne(new Document("id", id), new Document("$set", param));
+    public void updateCollection(Document param, String id) {
+        collection.updateOne(eq("id_private", id), new Document("$set", param));
     }
 
-    public void removeCollection(Document param, Integer id) {
-        collection.deleteOne(new Document("id_task", id));
+    public void removeCollection(String id) {
+        collection.deleteOne(eq("id_private", id));
     }
 
     public void close() {

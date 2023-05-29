@@ -5,9 +5,7 @@
 		"build:tailwind": "pnpx tailwindcss build src/main/webapp/css/tail-wind.css -o src/main/webapp/css/tailwind.css"
 	},
 	"devDependencies": {
-		"@types/node": "^20.2.4",
 		"tailwindcss": "^3.3.2",
-		"ts-node": "^10.9.1",
 		"typescript": "^5.0.4"
 	}
 }

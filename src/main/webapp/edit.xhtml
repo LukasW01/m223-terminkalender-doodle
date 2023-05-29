@@ -1,22 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Created by IntelliJ IDEA.
-  User: lukaswigger
+  User: Elin
   Date: 14.05.23
   Time: 14:47
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jstl/core">
 
 <h:head>
     <link rel="stylesheet" href="css/tail-wind.css" />
     <link rel="stylesheet" href="css/tailwind.css" />
     <title>Edit Reservation - Doodle</title>
 </h:head>
-
 <h:body class="bg-gray-900">
-
+    <h:form class="max-w-xl">
+            <c:set var="reservation" value="#{reservationBean.getCollectionByPrivateID(param['id'])}"/>
+            <h:link outcome="index" class="block text-blue-600">← Back</h:link>
+            <h1 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">Edit Reservation</h1>
+            <div class="col-span-6 sm:col-span-4 my-1 mt-4">
+                <h:outputLabel for="date" value="Date:" class="block text-gray-300 text-sm font-bold mb-2" />
+                <h:inputText value="#{reservation.date}" id="date" class="block text-gray-300 text-sm font-bold mb-2" aria-placeholder="date"  />
+            </div>
+            <div class="col-span-6 sm:col-span-4 my-1">
+                <h:outputLabel for="from" value="From:" class="block text-gray-300 text-sm font-bold mb-2" />
+                <h:inputText value="#{reservation.from}" id="from" class="block text-gray-300 text-sm font-bold mb-2" aria-placeholder="from"/>
+            </div>
+            <div class="col-span-6 sm:col-span-4 my-1">
+                <h:outputLabel for="to" value="To:" class="block text-gray-300 text-sm font-bold mb-2" />
+                <h:inputText value="#{reservation.to}" id="to" class="block text-gray-300 text-sm font-bold mb-2" aria-placeholder="to" />
+            </div>
+            <div class="col-span-6 sm:col-span-4 my-1">
+                <h:outputLabel for="room" value="Room:" class="block text-gray-300 text-sm font-bold mb-2" />
+                <h:selectOneListbox id="room" value="#{reservationBean.info.room}" converter="roomConverter" class="border-gray-200 text-sm placeholder-gray-500 shadow-sm border-gray-700 bg-gray-800 text-white outline-none appearance-none border border-transparent rounded w-full p-2  text-white leading-normal appearance-none focus:outline-none  focus:bg-gray-800 focus:border-gray-300 focus:border-gray-500 focus:text-white">
+                    <f:selectItems value="#{reservationBean.allRooms}" />
+                </h:selectOneListbox>
+            </div>
+            <div class="col-span-6 sm:col-span-4 my-1">
+                <h:outputLabel for="participants" value="Participants: " class="block text-gray-300  text-sm font-bold mb-2" />
+                <h:selectManyListbox id="participants" value="#{reservationBean.info.participants}" class="border-gray-200 text-sm placeholder-gray-500 shadow-sm border-gray-700 bg-gray-800 text-white outline-none appearance-none border border-transparent rounded w-full p-2  text-white leading-normal appearance-none focus:outline-none  focus:bg-gray-800 focus:border-gray-300 focus:border-gray-500 focus:text-white">
+                    <f:selectItems value="#{reservationBean.info.participants}" />
+                </h:selectManyListbox>
+            </div>
+            <div class="col-span-6 sm:col-span-4 my-1 my-2">
+                <h:outputLabel for="comment" value="Comment:" class="block text-gray-300 text-sm font-bold mb-2" />
+                <h:inputTextarea value="#{reservation.comment}" id="comment" class="block text-gray-300 text-sm font-bold mb-2"  aria-placeholder="comment"/>
+            </div>
+            <h:commandButton value="Update" id="update" action="#{reservationBean.update(param['id'])}" class="my-4 inline-block shrink-0 h-12 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500 hover:bg-blue-700 hover:text-white w-1/2" />
+            <h:commandButton value="Delete" id="delte" action="#{reservationBean.delete(param['id'])}" class="my-4 inline-block shrink-0 h-12 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500 hover:bg-blue-700 hover:text-white w-1/2" />
+    </h:form>
 </h:body>
-
 </html>

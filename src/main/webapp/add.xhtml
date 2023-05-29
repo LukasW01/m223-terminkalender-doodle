@@ -39,8 +39,8 @@
                </div>
                <div class="col-span-6 sm:col-span-4 my-1">
                   <h:outputLabel for="room" value="Room: " class="block text-gray-300  text-sm font-bold mb-2" />
-                  <h:selectOneListbox id="room" class="border-gray-200 text-sm placeholder-gray-500 shadow-sm border-gray-700 bg-gray-800 text-white outline-none appearance-none border border-transparent rounded w-full p-2  text-white leading-normal appearance-none focus:outline-none  focus:bg-gray-800 focus:border-gray-300 focus:border-gray-500 focus:text-white">
-                     <f:selectItems value="#{reservationBean.info.rooms}" />
+                  <h:selectOneListbox id="room" value="#{reservationBean.info.room}" converter="roomConverter" class="border-gray-200 text-sm placeholder-gray-500 shadow-sm border-gray-700 bg-gray-800 text-white outline-none appearance-none border border-transparent rounded w-full p-2  text-white leading-normal appearance-none focus:outline-none  focus:bg-gray-800 focus:border-gray-300 focus:border-gray-500 focus:text-white">
+                     <f:selectItems value="#{reservationBean.allRooms}" />
                   </h:selectOneListbox>
                </div>
                <div class="col-span-6 sm:col-span-4 my-1">
