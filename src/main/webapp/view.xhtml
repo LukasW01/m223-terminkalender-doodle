@@ -1,11 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!--
+  Created by IntelliJ IDEA.
+  User: lukaswigger
+  Date: 14.05.23
+  Time: 14:47
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+>
+
+<h:head>
+    <link rel="stylesheet" href="css/tail-wind.css" />
+    <link rel="stylesheet" href="css/tailwind.css" />
+    <title>View Reservation - Doodle</title>
+</h:head>
+
+<h:body class="bg-gray-900">
+    <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
+        <div class="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-3">
+            <img alt="Benedict-Classroom" src="img/bene.png" class="absolute inset-0 h-full w-full object-cover"/>
+        </div>
+        <div class="px-8 py-8 sm:px-12 lg:col-span-7 lg:py-12 lg:px-16 xl:col-span-9">
+            <div class="max-w-xl lg:max-w-4xl">
+                <h:panelGroup rendered="#{not empty reservationBean.getCollectionByPublicID(param['id'])}" var="reservation">
+                    <h:link outcome="index" class="block text-blue-600">← Back</h:link>
+                    <h1 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">View Reservation</h1>
+                    <div class="col-span-6 sm:col-span-4 my-1 mt-4">
+                        <h:outputText value="Date: #{reservation.date != null ? reservation.date : 'No date defined'}" class="block text-gray-300 text-sm font-bold mb-2" />
+                    </div>
+                    <div class="col-span-6 sm:col-span-4 my-1">
+                        <h:outputText value="From: #{reservation.from != null ? reservation.from : 'No from defined'}" class="block text-gray-300 text-sm font-bold mb-2" />
+                    </div>
+                    <div class="col-span-6 sm:col-span-4 my-1">
+                        <h:outputText value="To: #{reservation.to != null ? reservation.to : 'No to defined'}" class="block text-gray-300 text-sm font-bold mb-2" />
+                    </div>
+                    <div class="col-span-6 sm:col-span-4 my-1">
+                        <h:outputText value="Room: #{reservation.rooms != null ? fn:substring(reservation.rooms, 1, fn:length(reservation.rooms) - 1) : 'No rooms defined'}" class="block text-gray-300 text-sm font-bold mb-2" />
+                    </div>
+                    <div class="col-span-6 sm:col-span-4 my-1">
+                        <h:outputText value="Participants: #{reservation.participants != null ? fn:substring(reservation.participants, 1, fn:length(reservation.participants) - 1) : 'No participants defined'}" class="block text-gray-300 text-sm font-bold mb-2" />
+                    </div>
+                    <div class="col-span-6 sm:col-span-4 my-1 my-2">
+                        <h:outputText value="Comment: #{reservation.comment != null ? reservation.comment : 'No comment available'}" class="block text-gray-300 text-sm font-bold mb-2" />
+                    </div>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{empty param['id']}">
+                    <h:link outcome="index" class="block text-blue-600">← Back</h:link>
+                    <h1 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">View Reservation</h1>
+                    <p class="text-xl font-bold text-gray-400 sm:text-xl md:text-xl"><span class="text-rose-900">Warning</span> - No parameter was provided.</p>
+                </h:panelGroup>
+            </div>
+        </div>
+    </div>
+</h:body>
+
 </html>

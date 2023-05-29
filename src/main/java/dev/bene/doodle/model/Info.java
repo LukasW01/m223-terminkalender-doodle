@@ -1,63 +1,74 @@
 package dev.bene.doodle.model;
 
-import org.bson.Document;
+import dev.bene.doodle.MongoDB;
 
+import com.mongodb.client.FindIterable;
+import org.bson.Document;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.UUID;
 
 public class Info {
-    private Integer id;
+    private String id_public;
+    private String id_private;
     private String date;
     private String from;
     private String to;
     private ArrayList<Room> rooms;
     private ArrayList<People> participants;
     private String comment;
-
-    public Info(String date, String from, String to, ArrayList<Room> rooms, String comment, ArrayList<People> participants) {
-        this.date = date;
-        this.from = from;
-        this.to = to;
-        this.rooms = rooms;
-        this.participants = participants;
-        this.comment = comment;
-    }
+    private final MongoDB mongoDB;
+    private final SimpleDateFormat dateFormatHHMM = new SimpleDateFormat("HH:mm");
+    private final SimpleDateFormat dateFormatYYYYMMDD = new SimpleDateFormat("yyyy-MM-dd");
 
     public Info() {
-        SimpleDateFormat dateFormatHHMM = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat dateFormatYYYYMMDD = new SimpleDateFormat("yyyy-MM-dd");
+        mongoDB = new MongoDB();
+        rooms = new ArrayList<>();
+        participants = new ArrayList<>();
 
+        placeholders();
+    }
+
+    public void placeholders() {
         date = dateFormatYYYYMMDD.format(new Date());
         from = dateFormatHHMM.format(new Date());
         to = dateFormatHHMM.format(new Date(new Date().getTime() + 180 * 60 * 1000));
 
-        rooms = new ArrayList<>();
-        participants = new ArrayList<>();
-
-        String[] roomNames = {"EG 103", "EG 106", "OG 134", "OG 138"};
-        for (String roomName : roomNames) {
-            rooms.add(new Room(roomName));
+        FindIterable<Document> roomNames = mongoDB.getCollectionRooms();
+        for (Document roomName : roomNames) {
+            String roomNameString = roomName.getString("roomName");
+            rooms.add(new Room(roomNameString));
         }
 
-        String[] participantNames = {
-                "Lukas", "Elin", "Jessica", "Annabel", "Ale", "Ada", "Ari", "Aya", "Aywin",
-                "Emilio", "Aleks", "Kieran", "Maor", "Martin", "Nikola", "Nils", "Ryan", "Shay", "Usman"
-        };
-        for (String participantName : participantNames) {
-            participants.add(new People(participantName));
+        FindIterable<Document> participantNames = mongoDB.getCollectionParticipant();
+        for (Document participantName : participantNames) {
+            String participantNameString = participantName.getString("participantName");
+            participants.add(new People(participantNameString));
         }
 
-        id = (int) (Math.random() * 1000000);
+        comment = "-";
+
+        id_public = UUID.randomUUID().toString();
+        id_private = UUID.randomUUID().toString();
     }
 
-    public Integer getId() {
-        return id;
+    public String getId_public() {
+        return id_public;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId_public(String id_public) {
+        this.id_public = id_public;
     }
+
+    public String getId_private() {
+        return id_private;
+    }
+
+    public void setId_private(String id_private) {
+        this.id_private = id_private;
+    }
+
     public String getDate() {
         return date;
     }
@@ -106,14 +117,11 @@ public class Info {
         this.comment = comment;
     }
 
-    @Override
-    public String toString(){
-        return date + " " + from + " " + to + " " + rooms.toString() + " " + participants.toString() + " " + comment;
-    }
-
     public Document toBson() {
         Document doc = new Document();
-        doc.append("id", id);
+        doc.append("reservation", true);
+        doc.append("id_public", id_public);
+        doc.append("id_private", id_private);
         doc.append("date", date);
         doc.append("from", from);
         doc.append("to", to);

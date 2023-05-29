@@ -5,15 +5,10 @@
   Date: 14.05.23
   Time: 14:47
 -->
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
 <h:head>
     <title>Doodle</title>
     <link rel="stylesheet" href="css/tail-wind.css" />
@@ -21,7 +16,7 @@
 </h:head>
 
 <h:body class="bg-gray-900">
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="relative overflow-x-auto shadow-md">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <caption class="p-5 text-lg font-semibold text-left bg-gray-800 text-white">
                 <div class="flex justify-between items-center">
@@ -31,48 +26,52 @@
             </caption>
             <thead class="text-xs uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">ID:</th>
                 <th scope="col" class="px-6 py-3">Date:</th>
                 <th scope="col" class="px-6 py-3">From:</th>
                 <th scope="col" class="px-6 py-3">To:</th>
                 <th scope="col" class="px-6 py-3">Room:</th>
                 <th scope="col" class="px-6 py-3">Participant:</th>
                 <th scope="col" class="px-6 py-3">Comment:</th>
+                <th scope="col" class="px-6 py-3">View:</th>
             </tr>
             </thead>
             <tbody>
-                <ui:fragment rendered="#{null != reservationBean.get()}">
-                    <tr class="bg-gray-800">
-                        <td class="px-6 py-4 whitespace-nowrap" colspan="7">
-                            <div class="text-sm text-white">No reservations found</div>
-                        </td>
-                    </tr>
-                </ui:fragment>
-                <ui:repeat value="#{reservationBean.get()}" var="reservation">
+            <ui:fragment rendered="#{not empty reservationBean.getCollectionEvents()}">
+                <ui:repeat value="#{reservationBean.getCollectionEvents()}" var="reservation">
                     <tr class="bg-gray-800">
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-white">#{reservation.id}</div>
+                            <div class="text-sm text-white">#{reservation.date != null ? reservation.date : 'No date definied'}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-white">#{reservation.date}</div>
+                            <div class="text-sm text-white">#{reservation.from != null ? reservation.from : 'No from definied'}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-white">#{reservation.from}</div>
+                            <div class="text-sm text-white">#{reservation.to != null ? reservation.to : 'No to definied'}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-white">#{reservation.to}</div>
+                            <div class="text-sm text-white">#{reservation.rooms != null ? fn:substring(reservation.rooms, 1, fn:length(reservation.rooms) - 1) : 'No rooms definied'}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-white">#{fn:substring(reservation.rooms, 1, fn:length(reservation.rooms) - 1)}</div>
+                            <div class="text-sm text-white">#{reservation.participants != null ? fn:substring(reservation.participants, 1, fn:length(reservation.participants) - 1) : 'No participants definied'}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-white">#{fn:substring(reservation.participants, 1, fn:length(reservation.participants) - 1)}</div>
+                            <div class="text-sm text-white">#{reservation.comment != null ? reservation.comment : 'No comment available'}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-white">#{reservation.comment}</div>
+                            <h:link value="View reservation" outcome="view.xhtml" class="active:text-blue-500 w-52 items-end text-blue-600" style="width: 215px;">
+                                <f:param name="id" value="#{reservation.id_public != null ? reservation.id_public : ''}" />
+                            </h:link>
                         </td>
                     </tr>
                 </ui:repeat>
+            </ui:fragment>
+            <ui:fragment rendered="#{empty reservationBean.getCollectionEvents()}">
+                <tr class="bg-gray-800">
+                    <td class="px-6 py-4 whitespace-nowrap" colspan="7">
+                        <div class="text-sm text-white">No reservations found</div>
+                    </td>
+                </tr>
+            </ui:fragment>
             </tbody>
         </table>
     </div>
