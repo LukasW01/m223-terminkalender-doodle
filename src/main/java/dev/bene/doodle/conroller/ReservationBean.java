@@ -56,6 +56,14 @@ public class ReservationBean {
         return "secrets.xhtml";
     }
 
+    public void submitRoom() {
+        mongoDB.setRoom(info.getRoomName());
+    }
+
+    public void submitParticipant() {
+        mongoDB.setParticipant(info.getParticipantName());
+    }
+
     public String delete(String id) {
         mongoDB.removeCollection(id);
         return "index.xhtml?faces-redirect=true";

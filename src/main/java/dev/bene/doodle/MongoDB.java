@@ -63,6 +63,14 @@ public class MongoDB {
         }
     }
 
+    public void setRoom(String roomName) {
+        collection.insertOne(new Document("room", true).append("roomName", roomName));
+    }
+
+    public void setParticipant(String participantName) {
+        collection.insertOne(new Document("participant", true).append("participantName", participantName));
+    }
+
 
     public void updateCollection(Document params, String id) {
         collection.replaceOne(eq("id_private", id), params);

@@ -2,9 +2,7 @@ package dev.bene.doodle.model;
 
 import dev.bene.doodle.MongoDB;
 
-import com.mongodb.client.FindIterable;
 import org.bson.Document;
-
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
@@ -15,6 +13,8 @@ import java.util.stream.Collectors;
 public class Info {
     private String id_public;
     private String id_private;
+    private String roomName;
+    private String participantName;
     private String date;
     private String from;
     private String to;
@@ -47,6 +47,22 @@ public class Info {
         } catch (NoSuchAlgorithmException e) {
             System.err.println("RSA is not a know generator");
         }
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public String getParticipantName() {
+        return participantName;
+    }
+
+    public void setParticipantName(String participantName) {
+        this.participantName = participantName;
     }
 
     public String getId_public() {
