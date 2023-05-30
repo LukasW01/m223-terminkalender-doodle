@@ -46,14 +46,14 @@
                <div class="col-span-6 sm:col-span-4 my-1">
                   <h:outputLabel for="participants" value="Participants: " class="block text-gray-300  text-sm font-bold mb-2" />
                   <h:selectManyListbox id="participants" value="#{reservationBean.info.participants}" class="border-gray-200 text-sm placeholder-gray-500 shadow-sm border-gray-700 bg-gray-800 text-white outline-none appearance-none border border-transparent rounded w-full p-2  text-white leading-normal appearance-none focus:outline-none  focus:bg-gray-800 focus:border-gray-300 focus:border-gray-500 focus:text-white">
-                     <f:selectItems value="#{reservationBean.info.participants}" />
+                     <f:selectItems value="#{reservationBean.allParticipants}" />
                   </h:selectManyListbox>
                </div>
                <div class="col-span-6 sm:col-span-4 my-1 my-2">
                   <h:outputLabel for="comment" value="Comment: " class="block text-gray-300  text-sm font-bold mb-2" />
                   <h:inputTextarea id="comment" value="#{reservationBean.info.comment}" class="border-gray-200 text-sm placeholder-gray-500 shadow-sm border-gray-700 bg-gray-800 text-white outline-none appearance-none border border-transparent rounded w-full p-2  text-white leading-normal appearance-none focus:outline-none  focus:bg-gray-800 focus:border-gray-300 focus:border-gray-500 focus:text-white" />
                </div>
-               <h:commandButton value="Submit" id="submit" action="#{reservationBean.submit()}" class="my-4 inline-block shrink-0 h-12 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500 hover:bg-blue-700 hover:text-white w-1/2" />
+               <h:commandButton value="Submit" id="submit" action="#{reservationBean.submit()}" class="my-4 inline-block shrink-0 h-12 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500 hover:bg-blue-700 hover:text-white" />
             </h:form>
          </div>
       </div>

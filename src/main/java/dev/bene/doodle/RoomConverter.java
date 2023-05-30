@@ -1,4 +1,4 @@
-package dev.bene.doodle.conroller;
+package dev.bene.doodle;
 
 import dev.bene.doodle.model.Room;
 

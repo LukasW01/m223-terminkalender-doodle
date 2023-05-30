@@ -132,14 +132,14 @@ public class Info {
     }
 
     public void fromBSON(Document doc) {
+        final String participantsString = doc.getString("participants");
+        participants = Arrays.stream(participantsString.substring(1, participantsString.length() - 1).split(",")).map(People::new).collect(Collectors.toList());
         id_public = doc.getString("id_public");
         id_private = doc.getString("id_private");
         date = doc.getString("date");
         from = doc.getString("from");
         to = doc.getString("to");
         room = new Room(doc.getString("room"));
-        final String participantsString = doc.getString("participants");
-        participants = Arrays.stream(participantsString.substring(1, participantsString.length() - 1).split(",")).map(People::new).collect(Collectors.toList());
         comment = doc.getString("comment");
     }
 }

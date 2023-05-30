@@ -53,7 +53,7 @@ public class ReservationBean {
 
     public String submit() {
         mongoDB.setCollection(info.toBson());
-        return "index.xhtml";
+        return "secrets.xhtml";
     }
 
     public String delete(String id) {
