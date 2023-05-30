@@ -15,6 +15,7 @@ public class Info {
     private String id_private;
     private String roomName;
     private String participantName;
+    private String search;
     private String date;
     private String from;
     private String to;
@@ -47,6 +48,14 @@ public class Info {
         } catch (NoSuchAlgorithmException e) {
             System.err.println("RSA is not a know generator");
         }
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 
     public String getRoomName() {

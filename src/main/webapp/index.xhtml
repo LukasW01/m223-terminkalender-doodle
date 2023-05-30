@@ -21,9 +21,19 @@
             <caption class="p-5 text-lg font-semibold text-left bg-gray-800 text-white">
                 <div class="flex justify-between items-center">
                     <span class="text-3xl">Room reservations</span>
-                    <h:form>
-                        <h:commandLink  action="#{reservationBean.add()}" class="my-4 shrink-0 h-12 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500 hover:bg-blue-700 hover:text-white w-52 items-end" style="width: 215px;">Add reservation</h:commandLink>
-                    </h:form>
+                    <div class="flex items-center">
+                        <h:form class="flex items-center">
+                            <div class="relative flex mr-3 w-96">
+                                <h:inputText value="#{reservationBean.info.search}" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                <h:commandLink value="Search" action="#{reservationBean.edit(reservationBean.info.search)}" class="ml-40 p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 absolute right-0 top-0 bottom-0" />
+                            </div>
+                        </h:form>
+                        <div class="inline-block">
+                            <h:form>
+                                <h:commandLink action="#{reservationBean.add()}" class="my-4 shrink-0 h-12 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500 hover:bg-blue-700 hover:text-white w-52 items-end">Add reservation</h:commandLink>
+                            </h:form>
+                        </div>
+                    </div>
                 </div>
             </caption>
             <thead class="text-xs uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -35,7 +45,6 @@
                 <th scope="col" class="px-6 py-3">Participant:</th>
                 <th scope="col" class="px-6 py-3">Comment:</th>
                 <th scope="col" class="px-6 py-3">View:</th>
-                <th scope="col" class="px-6 py-3">Edit:</th>
             </tr>
             </thead>
             <tbody>
@@ -64,11 +73,6 @@
                             <h:link value="View reservation" outcome="view.xhtml" class="active:text-blue-500 w-52 items-end text-blue-600" style="width: 215px;">
                                 <f:param name="id" value="#{reservation.id_public != null ? reservation.id_public : ''}" />
                             </h:link>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <h:form>
-                                <h:commandLink value="Edit reservation" action="#{reservationBean.edit(reservation.id_private)}" class="active:text-blue-500 w-52 items-end text-blue-600" style="width: 215px;"/>
-                            </h:form>
                         </td>
                     </tr>
                 </ui:repeat>
