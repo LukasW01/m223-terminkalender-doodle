@@ -143,6 +143,7 @@ public class Info {
     }
 
     public Document toBson() {
+        try {
         Document doc = new Document();
         doc.append("reservation", true);
         doc.append("id_public", id_public);
@@ -154,9 +155,14 @@ public class Info {
         doc.append("participants", participants.toString());
         doc.append("comment", comment);
         return doc;
+        } catch (Exception e) {
+            System.err.println("Error while creating BSON");
+            return null;
+        }
     }
 
     public void fromBSON(Document doc) {
+        try {
         final String participantsString = doc.getString("participants");
         participants = Arrays.stream(participantsString.substring(1, participantsString.length() - 1).split(",")).map(People::new).collect(Collectors.toList());
         id_public = doc.getString("id_public");
@@ -166,5 +172,8 @@ public class Info {
         to = doc.getString("to");
         room = new Room(doc.getString("room"));
         comment = doc.getString("comment");
+        } catch (Exception e) {
+            System.err.println("Error while parsing BSON");
+        }
     }
 }
