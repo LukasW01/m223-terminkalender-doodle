@@ -37,23 +37,13 @@ public class ReservationBean {
         return mongoDB.getCollectionEvents();
     }
 
-    public Info getCollectionByPublicID(String id) {
-        final Info info = new Info();
-        info.fromBSON(mongoDB.getReservationByPublicID(id));
-
-        return info;
-    }
-
-    public Info getCollectionByPrivateID(String id) {
-        final Info info = new Info();
-        info.fromBSON(mongoDB.getReservationByPrivateID(id));
-
-        return info;
-    }
-
     public String submit() {
-        mongoDB.setCollection(info.toBson());
-        return "secrets.xhtml";
+        if (info.toBson() == null) {
+            return "error.xhtml?faces-redirect=true";
+        } else {
+            mongoDB.setCollection(info.toBson());
+            return "secrets.xhtml";
+        }
     }
 
     public void submitRoom() {
@@ -70,8 +60,12 @@ public class ReservationBean {
     }
 
     public String update(String id) {
-        mongoDB.updateCollection(info.toBson(), id);
-        return "edit.xhtml?faces-redirect=true";
+        if (info.toBson() == null) {
+            return "error.xhtml?faces-redirect=true";
+        } else {
+            mongoDB.updateCollection(info.toBson(), id);
+            return "edit.xhtml?faces-redirect=true";
+        }
     }
 
     public List<Room> getAllRooms() {
@@ -96,18 +90,25 @@ public class ReservationBean {
 
     public String editPrivate(String id) {
         info = new Info();
-
-        Document doc = mongoDB.getReservationByPrivateID(id);
-        info.fromBSON(doc);
-        return "edit.xhtml?faces-redirect=true";
+        if (!info.fromBSON(mongoDB.getReservationByPrivateID(id))) {
+            return "error.xhtml?faces-redirect=true";
+        } else {
+            Document doc = mongoDB.getReservationByPrivateID(id);
+            info.fromBSON(doc);
+            return "edit.xhtml?faces-redirect=true";
+        }
     }
 
     public String viewPublic(String id) {
         info = new Info();
 
-        Document doc = mongoDB.getReservationByPublicID(id);
-        info.fromBSON(doc);
-        return "view.xhtml?faces-redirect=true";
+       if (!info.fromBSON(mongoDB.getReservationByPublicID(id))) {
+           return "error.xhtml?faces-redirect=true";
+       } else {
+           Document doc = mongoDB.getReservationByPublicID(id);
+           info.fromBSON(doc);
+           return "view.xhtml?faces-redirect=true";
+       }
     }
 
     public String add() {

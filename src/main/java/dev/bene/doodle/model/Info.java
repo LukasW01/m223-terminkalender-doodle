@@ -155,16 +155,16 @@ public class Info {
 
     public Document toBson() {
         try {
-        Document doc = new Document();
-        doc.append("reservation", true);
-        doc.append("id_public", id_public);
-        doc.append("id_private", id_private);
-        doc.append("date", date);
-        doc.append("from", from);
-        doc.append("to", to);
-        doc.append("room", room != null ? room.toString() : "");
-        doc.append("participants", participants.toString());
-        doc.append("comment", comment);
+            Document doc = new Document();
+            doc.append("reservation", true);
+            doc.append("id_public", id_public);
+            doc.append("id_private", id_private);
+            doc.append("date", date);
+            doc.append("from", from);
+            doc.append("to", to);
+            doc.append("room", room != null ? room.toString() : "");
+            doc.append("participants", participants.toString());
+            doc.append("comment", comment);
         return doc;
         } catch (Exception e) {
             System.err.println("Error while creating BSON");
@@ -172,19 +172,22 @@ public class Info {
         }
     }
 
-    public void fromBSON(Document doc) {
+
+    public boolean fromBSON(Document doc) {
         try {
-        final String participantsString = doc.getString("participants");
-        participants = Arrays.stream(participantsString.substring(1, participantsString.length() - 1).split(",")).map(People::new).collect(Collectors.toList());
-        id_public = doc.getString("id_public");
-        id_private = doc.getString("id_private");
-        date = doc.getString("date");
-        from = doc.getString("from");
-        to = doc.getString("to");
-        room = new Room(doc.getString("room"));
-        comment = doc.getString("comment");
+            final String participantsString = doc.getString("participants");
+            participants = Arrays.stream(participantsString.substring(1, participantsString.length() - 1).split(",")).map(People::new).collect(Collectors.toList());
+            id_public = doc.getString("id_public");
+            id_private = doc.getString("id_private");
+            date = doc.getString("date");
+            from = doc.getString("from");
+            to = doc.getString("to");
+            room = new Room(doc.getString("room"));
+            comment = doc.getString("comment");
+            return true;
         } catch (Exception e) {
             System.err.println("Error while parsing BSON");
+            return false;
         }
     }
 }
