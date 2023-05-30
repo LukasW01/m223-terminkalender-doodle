@@ -3,17 +3,17 @@ package dev.bene.doodle.conroller;
 import com.mongodb.client.FindIterable;
 import dev.bene.doodle.model.Info;
 import dev.bene.doodle.MongoDB;
+import dev.bene.doodle.model.People;
 import dev.bene.doodle.model.Room;
 import org.bson.Document;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import java.net.URLEncoder;
+import javax.faces.bean.SessionScoped;
 import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class ReservationBean {
 
     private Info info;
@@ -76,9 +76,24 @@ public class ReservationBean {
         return rooms;
     }
 
+    public List<People> getAllParticipants() {
+        List<People> participants = new ArrayList<>();
+        FindIterable<Document> participantNames = mongoDB.getCollectionParticipant();
+        for (Document participantName : participantNames) {
+            String participantNameString = participantName.getString("participantName");
+            participants.add(new People(participantNameString));
+        }
+        return participants;
+    }
+
     public String edit(String id) {
         Document doc = mongoDB.getReservationByPrivateID(id);
         info.fromBSON(doc);
         return "edit.xhtml?faces-redirect=true";
+    }
+
+    public String add() {
+        info = new Info();
+        return "add.xhtml?faces-redirect=true";
     }
 }

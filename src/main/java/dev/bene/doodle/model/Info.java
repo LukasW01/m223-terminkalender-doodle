@@ -37,14 +37,6 @@ public class Info {
         from = dateFormatHHMM.format(new Date());
         to = dateFormatHHMM.format(new Date(new Date().getTime() + 180 * 60 * 1000));
 
-
-
-        FindIterable<Document> participantNames = mongoDB.getCollectionParticipant();
-        for (Document participantName : participantNames) {
-            String participantNameString = participantName.getString("participantName");
-            participants.add(new People(participantNameString));
-        }
-
         comment = "-";
 
         try {
@@ -97,13 +89,6 @@ public class Info {
         this.to = to;
     }
 
-
-
-
-
-
-
-
     public List<People> getParticipants() {
         return participants;
     }
@@ -146,8 +131,6 @@ public class Info {
         return doc;
     }
 
-
-
     public void fromBSON(Document doc) {
         id_public = doc.getString("id_public");
         id_private = doc.getString("id_private");
@@ -155,7 +138,8 @@ public class Info {
         from = doc.getString("from");
         to = doc.getString("to");
         room = new Room(doc.getString("room"));
-        participants = Arrays.stream(doc.getString("participants").split(",")).map(People::new).collect(Collectors.toList());
+        final String participantsString = doc.getString("participants");
+        participants = Arrays.stream(participantsString.substring(1, participantsString.length() - 1).split(",")).map(People::new).collect(Collectors.toList());
         comment = doc.getString("comment");
     }
 }
