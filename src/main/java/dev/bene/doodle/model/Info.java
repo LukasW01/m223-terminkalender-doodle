@@ -15,7 +15,8 @@ public class Info {
     private String id_private;
     private String roomName;
     private String participantName;
-    private String search;
+    private String searchPublic;
+    private String searchPrivate;
     private String date;
     private String from;
     private String to;
@@ -39,6 +40,8 @@ public class Info {
         to = dateFormatHHMM.format(new Date(new Date().getTime() + 180 * 60 * 1000));
 
         comment = "-";
+        searchPrivate = "Private key";
+        searchPublic = "Public key";
 
         try {
             KeyPair keyPair = KeyPairGenerator.getInstance("RSA").generateKeyPair();
@@ -50,12 +53,20 @@ public class Info {
         }
     }
 
-    public String getSearch() {
-        return search;
+    public String getSearchPublic() {
+        return searchPublic;
     }
 
-    public void setSearch(String search) {
-        this.search = search;
+    public void setSearchPublic(String searchPublic) {
+        this.searchPublic = searchPublic;
+    }
+
+    public String getSearchPrivate() {
+        return searchPrivate;
+    }
+
+    public void setSearchPrivate(String searchPrivate) {
+        this.searchPrivate = searchPrivate;
     }
 
     public String getRoomName() {

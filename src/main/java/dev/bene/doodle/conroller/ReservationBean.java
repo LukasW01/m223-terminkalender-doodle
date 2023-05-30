@@ -94,10 +94,20 @@ public class ReservationBean {
         return participants;
     }
 
-    public String edit(String id) {
+    public String editPrivate(String id) {
+        info = new Info();
+
         Document doc = mongoDB.getReservationByPrivateID(id);
         info.fromBSON(doc);
         return "edit.xhtml?faces-redirect=true";
+    }
+
+    public String viewPublic(String id) {
+        info = new Info();
+
+        Document doc = mongoDB.getReservationByPublicID(id);
+        info.fromBSON(doc);
+        return "view.xhtml?faces-redirect=true";
     }
 
     public String add() {
