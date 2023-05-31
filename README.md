@@ -15,8 +15,7 @@ This a room planning program (inspired by Doodle) written in Java (JSF) as a web
 1. Install dependencies
 ```bash
 # Maven
-maven install
-
+mvn install
 # PNPM
 pnpm i
 ```
@@ -34,9 +33,7 @@ pnpm run build:tailwind
 
 > https://www.mongodb.com/docs/manual/installation/
 
-5. Edit `MongoDB.java`
-
-Edit the database connection in the `MongoDB.java` file to match your environment.
+5. Edit the database connection in the `MongoDB.java` file to match your environment.
 
 6. Run the application
 
