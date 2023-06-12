@@ -31,10 +31,10 @@ public class Info {
         mongoDB = new MongoDB();
         participants = new ArrayList<>();
 
-        placeholders();
+        init();
     }
 
-    public void placeholders() {
+    public void init() {
         date = dateFormatYYYYMMDD.format(new Date());
         from = dateFormatHHMM.format(new Date());
         to = dateFormatHHMM.format(new Date(new Date().getTime() + 180 * 60 * 1000));
@@ -52,6 +52,8 @@ public class Info {
             System.err.println("RSA is not a know generator");
         }
     }
+
+
 
     public String getSearchPublic() {
         return searchPublic;
@@ -165,7 +167,7 @@ public class Info {
             doc.append("room", room != null ? room.toString() : "");
             doc.append("participants", participants.toString());
             doc.append("comment", comment);
-        return doc;
+            return doc;
         } catch (Exception e) {
             System.err.println("Error while creating BSON");
             return null;

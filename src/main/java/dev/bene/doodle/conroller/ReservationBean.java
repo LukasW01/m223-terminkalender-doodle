@@ -1,16 +1,12 @@
 package dev.bene.doodle.conroller;
 
-import com.mongodb.client.FindIterable;
 import dev.bene.doodle.model.Info;
 import dev.bene.doodle.MongoDB;
-import dev.bene.doodle.model.People;
-import dev.bene.doodle.model.Room;
-import org.bson.Document;
 
+import org.bson.Document;
+import com.mongodb.client.FindIterable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import java.util.ArrayList;
-import java.util.List;
 
 @ManagedBean
 @SessionScoped
@@ -46,12 +42,9 @@ public class ReservationBean {
         }
     }
 
-    public void submitRoom() {
-        mongoDB.setRoom(info.getRoomName());
-    }
-
-    public void submitParticipant() {
-        mongoDB.setParticipant(info.getParticipantName());
+    public String add() {
+        info = new Info();
+        return "add.xhtml?faces-redirect=true";
     }
 
     public String delete(String id) {
@@ -68,28 +61,9 @@ public class ReservationBean {
         }
     }
 
-    public List<Room> getAllRooms() {
-        List<Room> rooms = new ArrayList<>();
-        FindIterable<Document> roomNames = mongoDB.getCollectionRooms();
-        for (Document roomName : roomNames) {
-            String roomNameString = roomName.getString("roomName");
-            rooms.add(new Room(roomNameString));
-        }
-        return rooms;
-    }
-
-    public List<People> getAllParticipants() {
-        List<People> participants = new ArrayList<>();
-        FindIterable<Document> participantNames = mongoDB.getCollectionParticipant();
-        for (Document participantName : participantNames) {
-            String participantNameString = participantName.getString("participantName");
-            participants.add(new People(participantNameString));
-        }
-        return participants;
-    }
-
     public String editPrivate(String id) {
         info = new Info();
+
         if (!info.fromBSON(mongoDB.getReservationByPrivateID(id))) {
             return "error.xhtml?faces-redirect=true";
         } else {
@@ -109,10 +83,5 @@ public class ReservationBean {
            info.fromBSON(doc);
            return "view.xhtml?faces-redirect=true";
        }
-    }
-
-    public String add() {
-        info = new Info();
-        return "add.xhtml?faces-redirect=true";
     }
 }

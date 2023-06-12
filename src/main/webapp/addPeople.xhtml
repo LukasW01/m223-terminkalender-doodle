@@ -27,9 +27,9 @@
                 <h:form class="max-w-xl">
                     <div class="col-span-6 sm:col-span-4 my-1 mt-4">
                         <h:outputLabel for="name" value="Name: " class="block text-gray-300  text-sm font-bold mb-2" />
-                        <h:inputText id="name" value="#{reservationBean.info.participantName}" class="border-gray-200 text-sm placeholder-gray-500 shadow-sm border-gray-700 bg-gray-800 text-white outline-none appearance-none border border-transparent rounded w-full p-2  text-white leading-normal appearance-none focus:outline-none  focus:bg-gray-800 focus:border-gray-300 focus:border-gray-500 focus:text-white"/>
+                        <h:inputText id="name" value="#{infoBean.info.participantName}" class="border-gray-200 text-sm placeholder-gray-500 shadow-sm border-gray-700 bg-gray-800 text-white outline-none appearance-none border border-transparent rounded w-full p-2  text-white leading-normal appearance-none focus:outline-none  focus:bg-gray-800 focus:border-gray-300 focus:border-gray-500 focus:text-white"/>
                     </div>
-                    <h:commandButton value="Submit" id="submit" action="#{reservationBean.submitParticipant()}" class="my-4 inline-block shrink-0 h-12 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500 hover:bg-blue-700 hover:text-white" />
+                    <h:commandButton value="Submit" id="submit" action="#{infoBean.submitParticipant()}" class="my-4 inline-block shrink-0 h-12 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500 hover:bg-blue-700 hover:text-white" />
                 </h:form>
             </div>
         </div>

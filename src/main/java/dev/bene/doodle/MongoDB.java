@@ -71,16 +71,11 @@ public class MongoDB {
         collection.insertOne(new Document("participant", true).append("participantName", participantName));
     }
 
-
     public void updateCollection(Document params, String id) {
         collection.replaceOne(eq("id_private", id), params);
     }
 
     public void removeCollection(String id) {
         collection.deleteOne(eq("id_private", id));
-    }
-
-    public void close() {
-        mongoClient.close();
     }
 }
