@@ -51,12 +51,14 @@ public class InfoBean {
         return participants;
     }
 
-    public void submitRoom() {
+    public String submitRoom() {
         mongoDB.setRoom(info.getRoomName());
+        return "index.xhtml?faces-redirect=true";
     }
 
-    public void submitParticipant() {
+    public String submitParticipant() {
         mongoDB.setParticipant(info.getParticipantName());
+        return "index.xhtml?faces-redirect=true";
     }
 
 }

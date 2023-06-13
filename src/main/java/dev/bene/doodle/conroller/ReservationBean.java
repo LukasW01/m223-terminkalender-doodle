@@ -34,12 +34,8 @@ public class ReservationBean {
     }
 
     public String submit() {
-        if (info.toBson() == null) {
-            return "error.xhtml?faces-redirect=true";
-        } else {
-            mongoDB.setCollection(info.toBson());
-            return "secrets.xhtml";
-        }
+        mongoDB.setCollection(info.toBson());
+        return "secrets.xhtml";
     }
 
     public String add() {
@@ -53,19 +49,15 @@ public class ReservationBean {
     }
 
     public String update(String id) {
-        if (info.toBson() == null) {
-            return "error.xhtml?faces-redirect=true";
-        } else {
-            mongoDB.updateCollection(info.toBson(), id);
-            return "edit.xhtml?faces-redirect=true";
-        }
+        mongoDB.updateCollection(info.toBson(), id);
+        return "edit.xhtml?faces-redirect=true";
     }
 
     public String editPrivate(String id) {
         info = new Info();
 
         if (!info.fromBSON(mongoDB.getReservationByPrivateID(id))) {
-            return "error.xhtml?faces-redirect=true";
+            return "error.xhtml";
         } else {
             Document doc = mongoDB.getReservationByPrivateID(id);
             info.fromBSON(doc);
@@ -77,7 +69,7 @@ public class ReservationBean {
         info = new Info();
 
        if (!info.fromBSON(mongoDB.getReservationByPublicID(id))) {
-           return "error.xhtml?faces-redirect=true";
+           return "error.xhtml";
        } else {
            Document doc = mongoDB.getReservationByPublicID(id);
            info.fromBSON(doc);

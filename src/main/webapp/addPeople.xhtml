@@ -7,7 +7,7 @@
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <link rel="stylesheet" href="css/tail-wind.css" />
@@ -27,9 +27,10 @@
                 <h:form class="max-w-xl">
                     <div class="col-span-6 sm:col-span-4 my-1 mt-4">
                         <h:outputLabel for="name" value="Name: " class="block text-gray-300  text-sm font-bold mb-2" />
-                        <h:inputText id="name" value="#{infoBean.info.participantName}" class="border-gray-200 text-sm placeholder-gray-500 shadow-sm border-gray-700 bg-gray-800 text-white outline-none appearance-none border border-transparent rounded w-full p-2  text-white leading-normal appearance-none focus:outline-none  focus:bg-gray-800 focus:border-gray-300 focus:border-gray-500 focus:text-white"/>
+                        <p:inputText id="name" value="#{infoBean.info.participantName}" required="true" class="border-gray-200 text-sm placeholder-gray-500 shadow-sm border-gray-700 bg-gray-800 text-white outline-none appearance-none border border-transparent rounded w-full p-2  text-white leading-normal appearance-none focus:outline-none  focus:bg-gray-800 focus:border-gray-300 focus:border-gray-500 focus:text-white"/>
                     </div>
-                    <h:commandButton value="Submit" id="submit" action="#{infoBean.submitParticipant()}" class="my-4 inline-block shrink-0 h-12 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500 hover:bg-blue-700 hover:text-white" />
+                    <br/>
+                    <p:commandButton value="Submit" id="submit" action="#{infoBean.submitParticipant()}" update="@form" class="my-4 inline-block shrink-0 h-12 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500 hover:bg-blue-700 hover:text-white" />
                 </h:form>
             </div>
         </div>
