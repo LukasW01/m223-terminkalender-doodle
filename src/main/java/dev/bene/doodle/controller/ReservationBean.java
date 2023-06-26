@@ -1,4 +1,4 @@
-package dev.bene.doodle.conroller;
+package dev.bene.doodle.controller;
 
 import dev.bene.doodle.model.Info;
 import dev.bene.doodle.MongoDB;
