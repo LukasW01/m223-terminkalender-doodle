@@ -12,26 +12,13 @@ This a room planning program (inspired by Doodle) written in Java (JSF) as a web
 
 ## Getting Started
 
-1. Install dependencies
-```bash
-# Maven
-mvn install
-# PNPM
-pnpm i
-```
+1. Install dependencies: `mvn install && pnpm i`
 
-2. Tailwind CSS compilation:
-```bash
-pnpm run build:tailwind
-```
+2. Tailwind CSS compilation: `pnpm run build:tailwind`
 
-3. Install Wildfly
+3. Install Wildfly: https://www.wildfly.org/
 
-> https://www.wildfly.org/
-
-4. Install MongoDB
-
-> https://www.mongodb.com/docs/manual/installation/
+4. Install MongoDB: https://www.mongodb.com/docs/manual/installation/
 
 5. Edit the database connection in the `MongoDB.java` file to match your environment.
 
