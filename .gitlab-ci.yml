@@ -1,5 +1,3 @@
-image: maven:3-openjdk-17
-
 stages:
   - sast
   - test
@@ -22,6 +20,11 @@ variables:
 cache:
   paths:
     - .m2/repository
+    - node_modules/
+    - .pnpm-store/
+  key:
+    files:
+      - pnpm-lock.yaml
 
 sast:
   stage: sast
@@ -34,10 +37,27 @@ include:
 # -> (-) MongoDB
 package:
   stage: package
+  image: maven:3-openjdk-17
   script: "mvn package -Dmaven.test.skip"
   artifacts:
     when: always
     paths:
       - target/*.war
       - target/doodle*
+
+tailwind:
+  stage: tailwind
+  image: node:alpine
+  before_script:
+  - corepack enable
+  - corepack prepare pnpm@latest-8 --activate
+  - pnpm config set store-dir .pnpm-store
+  script:
+  - pnpm i
+  - pnpm build:tailwind
+  artifacts:
+    when: always
+    paths:
+      - /src/main/webapp/css/*.css
+
 
