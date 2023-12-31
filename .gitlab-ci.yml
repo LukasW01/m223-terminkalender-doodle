@@ -2,6 +2,7 @@ stages:
   - sast
   - test
   - package
+  - tailwind
 
 variables:
   MAVEN_OPTS: >-
