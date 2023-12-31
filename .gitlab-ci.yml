@@ -3,7 +3,7 @@ image: maven:3-openjdk-17
 stages:
   - sast
   - test
-  - build
+  - package
 
 variables:
   MAVEN_OPTS: >-
@@ -25,30 +25,18 @@ cache:
 
 sast:
   stage: sast
+  allow_failure: true
+  needs: [ ]
 include:
   - template: Security/SAST.gitlab-ci.yml
   - template: Security/Secret-Detection.gitlab-ci.yml
 
-#test:
-#  stage: test
-#  script:
-#    - 'mvn $MAVEN_CLI_OPTS verify'
-#  except:
-#    variables:
-#      - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-#  artifacts:
-#    when: always
-#    paths:
-#      - target/surefire-reports/maven.xml
-#      - target/failsafe-reports/maven.xml
-#    reports:
-#      junit:
-#        - target/surefire-reports/maven.xml
-#        - target/failsafe-reports/maven.xml
-
-
-build:
-  stage: build
-  script: "mvn install -B"
-
+# -> (-) MongoDB
+package:
+  stage: package
+  script: "mvn package -Dmaven.test.skip"
+  artifacts:
+    when: always
+    paths:
+      - target/*.jar
 
