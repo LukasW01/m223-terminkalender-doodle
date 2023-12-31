@@ -59,6 +59,6 @@ tailwind:
   artifacts:
     when: always
     paths:
-      - /src/main/webapp/css/*.css
+      - src/main/webapp/css/*.css
 
 
