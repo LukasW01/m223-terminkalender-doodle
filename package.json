@@ -5,7 +5,7 @@
 		"build:tailwind": "pnpx tailwindcss build src/main/webapp/css/tail-wind.css -o src/main/webapp/css/tailwind.css"
 	},
 	"devDependencies": {
-		"tailwindcss": "^3.4.0",
-		"typescript": "^5.0.4"
+		"typescript": "^5.3.3",
+		"tailwindcss": "^3.4.0"
 	}
 }
